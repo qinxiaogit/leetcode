@@ -2,15 +2,15 @@ package t66y
 
 import (
 	"context"
-	"errors"
+	//"errors"
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"log"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
-	"gopkg.in/yaml.v2"
 )
 
 //Image 存图片信息
@@ -147,6 +147,7 @@ func (d *Data) Save() {
 func (d *Data) data() string {
 	return filepath.Join(d.dir(), "data.yml")
 }
+
 // 从 path 加载数据文件。
 // 如果 path 为空，则从 data() 目录加载。
 func (d *Data) load(path string) error {
@@ -228,9 +229,9 @@ func (d *Data) link() {
 	}
 
 	if err := os.Symlink("../../../../"+d.dir(), d.date(time.Now())); err != nil {
-		if errors.Is(err, os.ErrExist) {
-			return
-		}
+		//if errors.Is(err, os.ErrExist) {
+		//	return
+		//}
 		panic(err)
 	}
 
@@ -240,9 +241,9 @@ func (d *Data) link() {
 // LinkTo 符号连接到指定的日期
 func (d *Data) LinkTo(day time.Time) {
 	if err := os.Symlink("../../../../"+d.dir(), d.date(day)); err != nil {
-		if errors.Is(err, os.ErrExist) {
-			return
-		}
+		//if errors.Is(err, os.ErrExist) {
+		//	return
+		//}
 		panic(err)
 	}
 }
